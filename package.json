@@ -1,0 +1,35 @@
+{
+  "name": "ap-api",
+  "version": "1.0.0",
+  "description": "Author and her publications api serverless",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "watch": "tsc --p .\\tsconfig.json --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilsonhamiltond/ap-api.git"
+  },
+  "keywords": [
+    "author",
+    "publications"
+  ],
+  "author": "Wilson Hamilton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wilsonhamiltond/ap-api/issues"
+  },
+  "homepage": "https://github.com/wilsonhamiltond/ap-api#readme",
+  "dependencies": {
+    "aws-sdk": "^2.6.7",
+    "uuid": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "~8.9.4",
+    "ts-node": "~7.0.0",
+    "typescript": "~3.2.2"
+  }
+}

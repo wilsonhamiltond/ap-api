@@ -24,12 +24,13 @@
   },
   "homepage": "https://github.com/wilsonhamiltond/ap-api#readme",
   "dependencies": {
+    "@types/aws-lambda": "^8.10.31",
     "aws-sdk": "^2.6.7",
     "uuid": "^2.0.3"
   },
   "devDependencies": {
-    "@types/node": "~8.9.4",
+    "@types/node": "^8.9.5",
     "ts-node": "~7.0.0",
-    "typescript": "~3.2.2"
+    "typescript": "^3.2.4"
   }
 }

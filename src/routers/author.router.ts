@@ -3,14 +3,17 @@ import { AuthorService } from '../services/author.service';
 export class AuthorRouter {
     constructor() {
     }
-    create(event, context, callback) {
+    static create(event, context, callback) {
         new AuthorService().create(event, (error, result) => {
             const response = {
                 statusCode: 200,
                 headers: {
                     "Access-Control-Allow-Origin": "*"
                 },
-                body: JSON.stringify(result),
+                body: JSON.stringify({
+                    result: true,
+                    data: result
+                })
             };
 
             context.succeed(response);
@@ -24,7 +27,10 @@ export class AuthorRouter {
                 headers: {
                     "Access-Control-Allow-Origin": "*"
                 },
-                body: JSON.stringify(result)
+                body: JSON.stringify({
+                    result: true,
+                    data: result
+                })
             };
 
             context.succeed(response);
@@ -38,7 +44,10 @@ export class AuthorRouter {
                 headers: {
                     "Access-Control-Allow-Origin": "*"
                 },
-                body: JSON.stringify(result)
+                body: JSON.stringify({
+                    result: true,
+                    data: result
+                })
             };
 
             context.succeed(response);
@@ -52,7 +61,10 @@ export class AuthorRouter {
                 headers: {
                     "Access-Control-Allow-Origin": "*"
                 },
-                body: JSON.stringify(result),
+                body: JSON.stringify({
+                    result: true,
+                    data: result
+                })
             };
 
             context.succeed(response);
@@ -66,10 +78,31 @@ export class AuthorRouter {
                 headers: {
                     "Access-Control-Allow-Origin": "*"
                 },
-                body: JSON.stringify(result),
+                body: JSON.stringify({
+                    result: true,
+                    data: result
+                })
             };
 
             context.succeed(response);
         });
+    }
+    
+    static filter (event, context, callback) {
+        new AuthorService().filter(event, (error, result) => {
+            const response = {
+                statusCode: 200,
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                },
+                body: JSON.stringify({
+                    result: !error,
+                    data: result,
+                    message: error
+                })
+            };
+
+            context.succeed(response);
+       });
     }
 }

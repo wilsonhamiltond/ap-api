@@ -1,15 +1,15 @@
 
-import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { DocumentClient, QueryInput, ScanInput } from 'aws-sdk/clients/dynamodb';
 import { v1 } from 'uuid';
 import { IAuthor } from '../models/author.model';
 
 export class AuthorService {
   private table: string = 'author';
-  private dynamoDb:DocumentClient;
+  private dynamoDb: DocumentClient;
 
   constructor() {
     this.dynamoDb = new DocumentClient();
-   }
+  }
 
   list(event, callback) {
     const params = {
@@ -24,14 +24,14 @@ export class AuthorService {
     });
   }
 
-  get(event, callback){
+  get(event, callback) {
     const params = {
       TableName: this.table,
       Key: {
         id: event.pathParameters.id
       }
     };
-  
+
     return this.dynamoDb.get(params, (error, data) => {
       if (error) {
         callback(error);
@@ -40,16 +40,16 @@ export class AuthorService {
     });
   }
 
-  create(event, callback){
-    const data:IAuthor = <IAuthor>JSON.parse(event.body);
-  
+  create(event, callback) {
+    const data: IAuthor = <IAuthor>JSON.parse(event.body);
+
     data.id = v1();
-  
+
     const params = {
       TableName: this.table,
       Item: data
     };
-  
+
     return this.dynamoDb.put(params, (error, data) => {
       if (error) {
         callback(error);
@@ -58,16 +58,16 @@ export class AuthorService {
     });
   };
 
-  update(event, callback){
-    const data:IAuthor = JSON.parse(event.body);
-  
+  update(event, callback) {
+    const data: IAuthor = JSON.parse(event.body);
+
     data.id = event.pathParameters.id;
-  
+
     const params = {
-      TableName : this.table,
+      TableName: this.table,
       Item: data
     };
-  
+
     return this.dynamoDb.put(params, (error, data) => {
       if (error) {
         callback(error);
@@ -76,14 +76,14 @@ export class AuthorService {
     });
   };
 
-  delete(event, callback){
+  delete(event, callback) {
     const params = {
-      TableName : this.table,
+      TableName: this.table,
       Key: {
         id: event.pathParameters.id
       }
     };
-  
+
     return this.dynamoDb.delete(params, (error, data) => {
       if (error) {
         callback(error);
@@ -92,39 +92,27 @@ export class AuthorService {
     });
   };
 
-  filter(event, callback){
-    const data:IAuthor = JSON.parse(event.body);
-  
-    data.id = event.pathParameters.id;
-  
-    const params = {
-      TableName : this.table,
-      Item: data
-    };
-  
-    return this.dynamoDb.put(params, (error, data) => {
-      if (error) {
-        callback(error);
-      }
-      callback(error, params.Item);
-    });
-  }
+  filter(event, callback) {
+    const data: any = JSON.parse(event.body);
 
-  size(event, callback){
-    const data:IAuthor = JSON.parse(event.body);
-  
-    data.id = event.pathParameters.id;
-  
-    const params = {
-      TableName : this.table,
-      Item: data
+    var params: ScanInput = {
+      TableName: this.table
     };
-  
-    return this.dynamoDb.put(params, (error, data) => {
+    if(data.params.name){
+      params.FilterExpression = "contains (#name, :name)";
+      params.ExpressionAttributeNames = {
+        "#name": "name",
+      };
+      params.ExpressionAttributeValues = {
+        ":name": data.params.name || ' '
+      };
+    }
+
+    return this.dynamoDb.scan(params, (error, data) => {
       if (error) {
         callback(error);
       }
-      callback(error, params.Item);
+      callback(error, data);
     });
   }
 }

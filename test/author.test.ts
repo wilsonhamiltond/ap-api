@@ -19,8 +19,8 @@ class AuthorTest {
         await this.list();
         await this.update(author);
         await this.get(author.id)
-        await this.delete(author.id);
         await this.filter();
+        await this.delete(author.id);
     }
 
     async create(): Promise<IAuthor> {

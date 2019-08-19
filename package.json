@@ -8,7 +8,9 @@
   },
   "scripts": {
     "watch": "tsc --p .\\tsconfig.json --watch",
-    "build": "tsc --p .\\tsconfig.json"
+    "build": "tsc --p .\\tsconfig.json",
+    "deploy": "serverless deploy",
+    "test": "mocha test/author.test.js"
   },
   "repository": {
     "type": "git",
@@ -25,11 +27,11 @@
   },
   "homepage": "https://github.com/wilsonhamiltond/ap-api#readme",
   "dependencies": {
-    "@types/aws-lambda": "^8.10.31",
     "aws-sdk": "^2.6.7",
     "uuid": "^2.0.3"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.31",
     "@types/node": "^8.9.5",
     "mocha": "^6.2.0",
     "should": "^13.2.3",

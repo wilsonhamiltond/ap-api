@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "watch": "tsc --p .\\tsconfig.json --watch"
+    "watch": "tsc --p .\\tsconfig.json --watch",
+    "build": "tsc --p .\\tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,9 @@
   },
   "devDependencies": {
     "@types/node": "^8.9.5",
+    "mocha": "^6.2.0",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2",
     "ts-node": "~7.0.0",
     "typescript": "^3.2.4"
   }

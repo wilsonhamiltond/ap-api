@@ -35,7 +35,9 @@ Config the end-pont url in
 test/author.test.ts
 
 this.server_url = '{{SERVER_URL}}';
+
 this.enviroment = '{{ENVIROMENT}}';
+
 this.api_url = 'API_URL';
 
 ### Build project and test

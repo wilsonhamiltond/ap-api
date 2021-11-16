@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/wilsonhamiltond/ap-api#readme",
   "dependencies": {
-    "aws-sdk": "^2.6.7",
+    "aws-sdk": "^2.814.0",
     "uuid": "^2.0.3"
   },
   "devDependencies": {
